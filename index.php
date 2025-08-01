@@ -16,6 +16,7 @@ if(isset($_SESSION['user_id'])){
     <div class="text-center space-y-4">
         <h1 class="text-3xl font-bold">Bienvenido al Gestor de Proyectos</h1>
         <p class="text-gray-700">Sistema sencillo para administrar proyectos y tareas.</p>
+        <div></div>
         <a href="app/views/login.php" class="bg-blue-500 text-white px-4 py-2 rounded">Iniciar sesión</a>
     </div>
 </body>
