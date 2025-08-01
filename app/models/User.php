@@ -36,5 +36,10 @@ class User {
         }
         return false;
     }
+
+    public function readAll(){
+        $stmt = $this->conn->query("SELECT id, name, email, role FROM " . $this->table_name);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
