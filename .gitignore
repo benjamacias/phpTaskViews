@@ -1,0 +1,38 @@
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignorar logs y temporales
+*.log
+*.tmp
+*.bak
+
+# Ignorar configuraciones de IDE
+.vscode/
+.idea/
+
+# Ignorar vendor y dependencias (Composer)
+vendor/
+
+# Ignorar uploads de usuarios
+public/uploads/
+
+# Ignorar caché y sesiones
+cache/
+*.cache
+*.session
+
+# Ignorar archivos ZIP y backups
+*.zip
+*.tar.gz
+
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Ignorar SQL exportados
+*.sql
+db/*.sql
+config/*.sql
