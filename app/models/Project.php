@@ -23,11 +23,22 @@ class Project {
         $stmt->bindParam(":leader_id", $this->leader_id);
         $stmt->bindParam(":start_date", $this->start_date);
         $stmt->bindParam(":end_date", $this->end_date);
-        return $stmt->execute();
+        if($stmt->execute()){
+            return $this->conn->lastInsertId();
+        }
+        return false;
     }
 
     public function readAll(){
         $stmt = $this->conn->query("SELECT * FROM " . $this->table_name);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function readByUser($user_id){
+        $query = "SELECT p.* FROM " . $this->table_name . " p JOIN project_users pu ON p.id = pu.project_id WHERE pu.user_id = :uid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':uid', $user_id);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -39,8 +50,8 @@ class Project {
     }
 
     public function update(){
-        $query = "UPDATE " . $this->table_name . " 
-                  SET name=:name, description=:description, leader_id=:leader_id, start_date=:start_date, end_date=:end_date 
+        $query = "UPDATE " . $this->table_name . "
+                  SET name=:name, description=:description, leader_id=:leader_id, start_date=:start_date, end_date=:end_date
                   WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":name", $this->name);
@@ -56,6 +67,24 @@ class Project {
         $stmt = $this->conn->prepare("DELETE FROM " . $this->table_name . " WHERE id=:id");
         $stmt->bindParam(":id", $this->id);
         return $stmt->execute();
+    }
+
+    public function assignUsers($projectId, $userIds){
+        $stmt = $this->conn->prepare("INSERT INTO project_users(project_id, user_id) VALUES(:pid, :uid)");
+        foreach($userIds as $uid){
+            $stmt->execute([':pid'=>$projectId, ':uid'=>$uid]);
+        }
+    }
+
+    public function getUsers($projectId){
+        $stmt = $this->conn->prepare("SELECT user_id FROM project_users WHERE project_id=:pid");
+        $stmt->execute([':pid'=>$projectId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function clearUsers($projectId){
+        $stmt = $this->conn->prepare("DELETE FROM project_users WHERE project_id=:pid");
+        $stmt->execute([':pid'=>$projectId]);
     }
 }
 ?>

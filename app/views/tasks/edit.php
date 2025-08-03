@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if(!isset($_SESSION['user_id'])){
@@ -13,6 +14,17 @@ if(!isset($_SESSION['user_id'])){
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-4 bg-gray-50">
+<?php include __DIR__ . '/../layout/header.php'; ?>
+<h1 class="text-2xl font-bold mb-4">Editar Tarea</h1>
+<form action="TaskController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
+    <div>
+        <label class="block mb-1">Proyecto:</label>
+        <select name="project_id" required class="border p-2 w-full rounded">
+            <?php foreach($projects as $p): ?>
+                <option value="<?php echo $p['id']; ?>" <?php echo $p['id']==$data['project_id']?'selected':''; ?>><?php echo htmlspecialchars($p['name']); ?></option>
+            <?php endforeach; ?>
+        </select>
+
 <h1 class="text-2xl font-bold mb-4">Editar Tarea</h1>
 <form action="TaskController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
     <div>
@@ -25,6 +37,10 @@ if(!isset($_SESSION['user_id'])){
     </div>
     <div>
         <label class="block mb-1">Asignar a:</label>
+        <select name="assigned_to[]" multiple class="border p-2 w-full rounded h-32">
+            <?php foreach($users as $u): ?>
+                <option value="<?php echo $u['id']; ?>" <?php echo in_array($u['id'],$assigned)?'selected':''; ?>><?php echo htmlspecialchars($u['name']); ?></option>
+
         <select name="assigned_to" class="border p-2 w-full rounded">
             <?php foreach($users as $u): ?>
                 <option value="<?php echo $u['id']; ?>" <?php echo $u['id']==$data['assigned_to']?'selected':''; ?>><?php echo htmlspecialchars($u['name']); ?></option>
@@ -33,7 +49,7 @@ if(!isset($_SESSION['user_id'])){
     </div>
     <div>
         <label class="block mb-1">Fecha límite:</label>
-        <input type="datetime-local" name="due_date" value="<?php echo date('Y-m-d\TH:i', strtotime($data['due_date'])); ?>" required class="border p-2 w-full rounded">
+        <input type="date" name="due_date" value="<?php echo $data['due_date']; ?>" required class="border p-2 w-full rounded">
     </div>
     <div>
         <label class="block mb-1">Estado:</label>

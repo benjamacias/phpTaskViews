@@ -13,6 +13,7 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-4 bg-gray-50">
+<?php include __DIR__ . '/../../layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Nuevo Usuario</h1>
 <form action="AdminController.php?action=create" method="POST" class="space-y-4">
     <div>
@@ -36,6 +37,6 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>
-<a href="../../../controllers/AdminController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="AdminController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
 </body>
 </html>

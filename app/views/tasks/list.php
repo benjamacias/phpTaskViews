@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if(!isset($_SESSION['user_id'])){
@@ -14,6 +15,7 @@ if(!isset($_SESSION['user_id'])){
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-4 bg-gray-50">
+<?php include __DIR__ . '/../layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Tareas</h1>
 <a href="TaskController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nueva tarea</a>
 <div class="grid grid-cols-3 gap-4 mt-4">
@@ -22,13 +24,8 @@ if(!isset($_SESSION['user_id'])){
         <?php foreach($tasks as $t): if($t['status']==='enproceso'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
-                <p class="text-sm text-gray-600">
-                    <?php
-                        $u = array_filter($users, fn($usr) => $usr['id'] == $t['assigned_to']);
-                        $u = array_shift($u);
-                        echo htmlspecialchars($u['name'] ?? '');
-                    ?>
-                </p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
                 <p class="text-sm">
                     <?php echo $t['due_date']; ?>
                     <?php if(strtotime($t['due_date']) < strtotime('+2 day')): ?>
@@ -44,13 +41,8 @@ if(!isset($_SESSION['user_id'])){
         <?php foreach($tasks as $t): if($t['status']==='completado'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
-                <p class="text-sm text-gray-600">
-                    <?php
-                        $u = array_filter($users, fn($usr) => $usr['id'] == $t['assigned_to']);
-                        $u = array_shift($u);
-                        echo htmlspecialchars($u['name'] ?? '');
-                    ?>
-                </p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
                 <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
@@ -61,20 +53,14 @@ if(!isset($_SESSION['user_id'])){
         <?php foreach($tasks as $t): if($t['status']==='cancelado'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
-                <p class="text-sm text-gray-600">
-                    <?php
-                        $u = array_filter($users, fn($usr) => $usr['id'] == $t['assigned_to']);
-                        $u = array_shift($u);
-                        echo htmlspecialchars($u['name'] ?? '');
-                    ?>
-                </p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
+                <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
-              <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
+                <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
         <?php endif; endforeach; ?>
     </div>
 </div>
-<a href="../views/dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
 <script>
 const tasks = document.querySelectorAll('.task');
 const columns = document.querySelectorAll('[data-status]');

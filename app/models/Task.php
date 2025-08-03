@@ -20,16 +20,51 @@ class Task {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":project_id", $this->project_id);
         $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":assigned_to", $this->assigned_to);
+        if($this->assigned_to === null){
+            $stmt->bindValue(":assigned_to", null, PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(":assigned_to", $this->assigned_to, PDO::PARAM_INT);
+        }
         $stmt->bindParam(":due_date", $this->due_date);
         $stmt->bindParam(":status", $this->status);
-        return $stmt->execute();
+        if($stmt->execute()){
+            return $this->conn->lastInsertId();
+        }
+        return false;
     }
 
-    public function readAll(){
-        $stmt = $this->conn->query("SELECT * FROM " . $this->table_name);
+    public function assignUsers($taskId, $userIds){
+        $stmt = $this->conn->prepare("INSERT INTO task_users(task_id, user_id) VALUES(:tid, :uid)");
+        foreach($userIds as $uid){
+            $stmt->execute([':tid'=>$taskId, ':uid'=>$uid]);
+        }
+    }
+
+    public function getUsers($taskId){
+        $stmt = $this->conn->prepare("SELECT u.name FROM users u JOIN task_users tu ON u.id = tu.user_id WHERE tu.task_id = :tid");
+        $stmt->execute([':tid'=>$taskId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function readAllWithUsers(){
+        $query = "SELECT t.*, p.name AS project_name, GROUP_CONCAT(u.name SEPARATOR ', ') AS users
+                  FROM tasks t
+                  LEFT JOIN projects p ON t.project_id = p.id
+                  LEFT JOIN task_users tu ON t.id = tu.task_id
+                  LEFT JOIN users u ON tu.user_id = u.id
+                  GROUP BY t.id";
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function readByUser($user_id){
+        $query = "SELECT t.*, p.name AS project_name FROM tasks t
+                  JOIN task_users tu ON t.id = tu.task_id
+                  JOIN projects p ON t.project_id = p.id
+                  WHERE tu.user_id = :uid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':uid', $user_id);
+        $stmt->execute();
 
     public function readOne(){
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->table_name . " WHERE id=:id");
@@ -45,7 +80,11 @@ class Task {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":project_id", $this->project_id);
         $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":assigned_to", $this->assigned_to);
+        if($this->assigned_to === null){
+            $stmt->bindValue(":assigned_to", null, PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(":assigned_to", $this->assigned_to, PDO::PARAM_INT);
+        }
         $stmt->bindParam(":due_date", $this->due_date);
         $stmt->bindParam(":status", $this->status);
         $stmt->bindParam(":id", $this->id);
@@ -56,6 +95,11 @@ class Task {
         $stmt = $this->conn->prepare("DELETE FROM " . $this->table_name . " WHERE id=:id");
         $stmt->bindParam(":id", $this->id);
         return $stmt->execute();
+    }
+
+    public function clearUsers($taskId){
+        $stmt = $this->conn->prepare("DELETE FROM task_users WHERE task_id=:tid");
+        $stmt->execute([':tid'=>$taskId]);
     }
 
     public function updateStatus($status){
