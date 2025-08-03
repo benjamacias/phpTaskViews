@@ -5,14 +5,14 @@
     <title>Tareas</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-4 bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/../layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Tareas</h1>
 <a href="TaskController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nueva tarea</a>
 <div class="grid grid-cols-3 gap-4 mt-4">
-    <div data-status="enproceso" class="p-4 bg-gray-100 rounded">
+    <div data-status="in_progress" class="p-4 bg-gray-100 rounded">
         <h2 class="font-semibold mb-2">En proceso</h2>
-        <?php foreach($tasks as $t): if($t['status']==='enproceso'): ?>
+        <?php foreach($tasks as $t): if(strtolower($t['status'])==='in_progress'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
@@ -27,9 +27,9 @@
             </div>
         <?php endif; endforeach; ?>
     </div>
-    <div data-status="completado" class="p-4 bg-gray-100 rounded">
+    <div data-status="completed" class="p-4 bg-gray-100 rounded">
         <h2 class="font-semibold mb-2">Completado</h2>
-        <?php foreach($tasks as $t): if($t['status']==='completado'): ?>
+        <?php foreach($tasks as $t): if($t['status']==='complete'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
@@ -39,9 +39,9 @@
             </div>
         <?php endif; endforeach; ?>
     </div>
-    <div data-status="cancelado" class="p-4 bg-gray-100 rounded">
-        <h2 class="font-semibold mb-2">Cancelado</h2>
-        <?php foreach($tasks as $t): if($t['status']==='cancelado'): ?>
+    <div data-status="pending" class="p-4 bg-gray-100 rounded">
+        <h2 class="font-semibold mb-2">Pendiente</h2>
+        <?php foreach($tasks as $t): if($t['status']==='pending'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>

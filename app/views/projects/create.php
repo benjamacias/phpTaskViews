@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 </head>
-<body class="p-4 bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/../layout/header.php'; ?>
 
 <h1 class="text-2xl font-bold mb-4">Nuevo Proyecto</h1>

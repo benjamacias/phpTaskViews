@@ -5,7 +5,7 @@
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/app/views/layout/header.php'; ?>
 <div class="flex items-center justify-center h-screen">
     <form action="app/controllers/AuthController.php" method="POST" class="bg-white p-6 rounded shadow w-80 space-y-4">

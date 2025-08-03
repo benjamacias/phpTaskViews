@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +6,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
-
 </head>
-<body class="p-4 bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/../layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Nueva Tarea</h1>
 <form action="TaskController.php?action=create" method="POST" class="space-y-4">
@@ -20,9 +18,6 @@
                 <option value="<?php echo $p['id']; ?>"><?php echo htmlspecialchars($p['name']); ?></option>
             <?php endforeach; ?>
         </select>
-
-<form action="TaskController.php?action=create" method="POST" class="space-y-4">
-    <div>
     </div>
     <div>
         <label class="block mb-1">Descripción:</label>
@@ -35,12 +30,17 @@
                 <option value="<?php echo $u['id']; ?>"><?php echo htmlspecialchars($u['name']); ?></option>
             <?php endforeach; ?>
         </select>
-
     </div>
     <div>
         <label class="block mb-1">Fecha límite:</label>
         <input type="date" name="due_date" required class="border p-2 w-full rounded">
-
+    </div>
+    <div>
+        <label class="block mb-1">Estado:</label>
+        <select name="status" class="border p-2 w-full rounded">
+            <option value="pending">Pendiente</option>
+            <option value="in_progress">En Progreso</option>
+        </select>
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>

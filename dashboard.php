@@ -9,7 +9,6 @@ require_once './config/database.php';
 $db = (new Database())->getConnection();
 
 $userId = $_SESSION['user_id'];
-
 // Contar proyectos
 $stmt = $db->prepare("SELECT COUNT(*) FROM project_users WHERE user_id = ?");
 $stmt->execute([$userId]);
@@ -27,7 +26,7 @@ $totalTasks = $stmt->fetchColumn();
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/app/views/layout/header.php'; ?>
 <div class="container mx-auto p-8">
     <h1 class="text-3xl font-bold mb-6">📊 Panel de Estadísticas</h1>

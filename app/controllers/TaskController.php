@@ -26,7 +26,7 @@ switch ($action) {
             $assignedUsers = $_POST['assigned_to'] ?? [];
             $task->assigned_to = $assignedUsers[0] ?? null;
             $task->due_date = $_POST['due_date'];
-            $task->status = 'enproceso';
+            $task->status = $_POST['status'] ?? 'pending'; // ✅ usar el estado del formulario
             $newId = $task->create();
             if($newId && $assignedUsers){
                 $task->assignUsers($newId, $assignedUsers);
@@ -38,6 +38,7 @@ switch ($action) {
         $users = $userModel->readAll();
         include __DIR__ . '/../views/tasks/create.php';
         break;
+
 
     case 'edit':
         $task->id = $_GET['id'];

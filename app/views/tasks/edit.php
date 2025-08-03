@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id'])){
     <title>Editar Tarea</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-4 bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/../layout/header.php'; ?>
 
 <h1 class="text-2xl font-bold mb-4">Editar Tarea</h1>
@@ -51,9 +51,9 @@ if(!isset($_SESSION['user_id'])){
     <div>
         <label class="block mb-1">Estado:</label>
         <select name="status" class="border p-2 w-full rounded">
-            <option value="enproceso" <?php echo $data['status']=='enproceso'?'selected':''; ?>>En proceso</option>
-            <option value="completado" <?php echo $data['status']=='completado'?'selected':''; ?>>Completado</option>
-            <option value="cancelado" <?php echo $data['status']=='cancelado'?'selected':''; ?>>Cancelado</option>
+            <option value="in_progress" <?php echo $data['status']=='in_progress'?'selected':''; ?>>En proceso</option>
+            <option value="completed" <?php echo $data['status']=='completed'?'selected':''; ?>>Completado</option>
+            <option value="pending" <?php echo $data['status']=='pending'?'selected':''; ?>>Cancelado</option>
         </select>
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>

@@ -47,12 +47,14 @@ class Task {
     }
 
     public function readAllWithUsers(){
-        $query = "SELECT t.*, p.name AS project_name, GROUP_CONCAT(u.name SEPARATOR ', ') AS users
-                  FROM tasks t
-                  LEFT JOIN projects p ON t.project_id = p.id
-                  LEFT JOIN task_users tu ON t.id = tu.task_id
-                  LEFT JOIN users u ON tu.user_id = u.id
-                  GROUP BY t.id";
+        $query = "SELECT t.*, 
+                        p.name AS project_name, 
+                        GROUP_CONCAT(u.name SEPARATOR ', ') AS users
+                FROM tasks t
+                LEFT JOIN projects p ON t.project_id = p.id
+                LEFT JOIN task_users tu ON t.id = tu.task_id
+                LEFT JOIN users u ON tu.user_id = u.id
+                GROUP BY t.id";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

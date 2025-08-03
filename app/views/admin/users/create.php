@@ -1,10 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
-    header('Location: ../../login.php');
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +5,7 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
     <title>Nuevo Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-4 bg-gray-50">
+<body class="bg-gray-50 w-screen h-screen overflow-x-hidden m-0 p-0">
 <?php include __DIR__ . '/../../layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Nuevo Usuario</h1>
 <form action="AdminController.php?action=create" method="POST" class="space-y-4">
