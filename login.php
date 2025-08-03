@@ -18,7 +18,6 @@ if(isset($_SESSION['user_id'])){
     <input type="email" name="email" placeholder="Email" required class="border p-2 w-full rounded">
     <input type="password" name="password" placeholder="Contrase&ntilde;a" required class="border p-2 w-full rounded">
     <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Ingresar</button>
-</form>
-<a href="index.php" class="absolute top-4 left-4 text-blue-600">Inicio</a>
+    <a href="register.php" class="block text-center text-blue-600">Crear cuenta</a>
 </body>
 </html>
