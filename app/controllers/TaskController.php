@@ -15,6 +15,7 @@ $task = new Task($db);
 $userModel = new User($db);
 $projectModel = new Project($db);
 
+
 $action = $_GET['action'] ?? 'list';
 
 switch ($action) {
@@ -58,7 +59,6 @@ switch ($action) {
         $data = $task->readOne();
         $assigned = $task->getUsers($task->id);
         $projects = $projectModel->readAll();
-        $users = $userModel->readAll();
         include __DIR__ . '/../views/tasks/edit.php';
         break;
 
@@ -81,6 +81,7 @@ switch ($action) {
 
     default:
         $tasks = $task->readAllWithUsers();
+
         include __DIR__ . '/../views/tasks/list.php';
         break;
 }

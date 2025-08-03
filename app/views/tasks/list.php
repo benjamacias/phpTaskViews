@@ -1,3 +1,12 @@
+
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +86,7 @@ columns.forEach(col => {
 
 function updateStatus(id, status){
   fetch('TaskController.php?action=updateStatus', {
+
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: 'id=' + encodeURIComponent(id) + '&status=' + encodeURIComponent(status)

@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +24,12 @@
                 <option value="<?php echo $p['id']; ?>"><?php echo htmlspecialchars($p['name']); ?></option>
             <?php endforeach; ?>
         </select>
+
+<h1 class="text-2xl font-bold mb-4">Nueva Tarea</h1>
+<form action="TaskController.php?action=create" method="POST" class="space-y-4">
+    <div>
+        <label class="block mb-1">Proyecto ID:</label>
+        <input type="number" name="project_id" required class="border p-2 w-full rounded">
     </div>
     <div>
         <label class="block mb-1">Descripción:</label>
@@ -24,6 +38,7 @@
     <div>
         <label class="block mb-1">Asignar a:</label>
         <select name="assigned_to[]" multiple class="border p-2 w-full rounded h-32">
+
             <?php foreach($users as $u): ?>
                 <option value="<?php echo $u['id']; ?>"><?php echo htmlspecialchars($u['name']); ?></option>
             <?php endforeach; ?>
@@ -32,6 +47,7 @@
     <div>
         <label class="block mb-1">Fecha límite:</label>
         <input type="date" name="due_date" required class="border p-2 w-full rounded">
+
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>

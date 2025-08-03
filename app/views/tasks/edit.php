@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +24,12 @@
                 <option value="<?php echo $p['id']; ?>" <?php echo $p['id']==$data['project_id']?'selected':''; ?>><?php echo htmlspecialchars($p['name']); ?></option>
             <?php endforeach; ?>
         </select>
+
+<h1 class="text-2xl font-bold mb-4">Editar Tarea</h1>
+<form action="TaskController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
+    <div>
+        <label class="block mb-1">Proyecto ID:</label>
+        <input type="number" name="project_id" value="<?php echo $data['project_id']; ?>" required class="border p-2 w-full rounded">
     </div>
     <div>
         <label class="block mb-1">Descripción:</label>
@@ -26,6 +40,10 @@
         <select name="assigned_to[]" multiple class="border p-2 w-full rounded h-32">
             <?php foreach($users as $u): ?>
                 <option value="<?php echo $u['id']; ?>" <?php echo in_array($u['id'],$assigned)?'selected':''; ?>><?php echo htmlspecialchars($u['name']); ?></option>
+
+        <select name="assigned_to" class="border p-2 w-full rounded">
+            <?php foreach($users as $u): ?>
+                <option value="<?php echo $u['id']; ?>" <?php echo $u['id']==$data['assigned_to']?'selected':''; ?>><?php echo htmlspecialchars($u['name']); ?></option>
             <?php endforeach; ?>
         </select>
     </div>

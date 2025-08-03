@@ -4,11 +4,13 @@ if(!isset($_SESSION['user_id'])){
     header("Location: login.php");
     exit;
 }
+
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../models/Task.php';
 $db = (new Database())->getConnection();
 $taskModel = new Task($db);
 $myTasks = $taskModel->readByUser($_SESSION['user_id']);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +20,7 @@ $myTasks = $taskModel->readByUser($_SESSION['user_id']);
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-6 bg-gray-50">
+
 <?php include __DIR__ . '/layout/header.php'; ?>
 <h1 class="text-2xl font-bold mb-4">Bienvenido, <?php echo $_SESSION['role'] === 'admin' ? 'Administrador' : 'Usuario'; ?></h1>
 <?php if(count($myTasks) > 0): ?>

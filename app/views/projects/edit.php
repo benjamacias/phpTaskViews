@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +15,7 @@
 </head>
 <body class="p-4 bg-gray-50">
 <?php include __DIR__ . '/../layout/header.php'; ?>
+
 <h1 class="text-2xl font-bold mb-4">Editar Proyecto</h1>
 <form action="ProjectController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
     <div>
@@ -33,6 +42,7 @@
             <?php endforeach; ?>
         </select>
     </div>
+
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>
 <a href="ProjectController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>

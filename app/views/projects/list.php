@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +37,12 @@
             <td class="border p-2"><?php echo htmlspecialchars($p['description']); ?></td>
             <td class="border p-2"><?php echo $p['start_date']; ?> - <?php echo $p['end_date']; ?></td>
             <td class="border p-2 space-x-2">
+
                 <?php if($_SESSION['role'] === 'admin'): ?>
                 <a href="ProjectController.php?action=edit&id=<?php echo $p['id']; ?>" class="text-blue-600">Editar</a>
                 <a href="ProjectController.php?action=delete&id=<?php echo $p['id']; ?>" onclick="return confirm('¿Eliminar?');" class="text-red-600">Eliminar</a>
                 <?php endif; ?>
+
             </td>
         </tr>
     <?php endforeach; ?>

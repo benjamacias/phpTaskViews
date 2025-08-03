@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +15,7 @@
 </head>
 <body class="p-4 bg-gray-50">
 <?php include __DIR__ . '/../layout/header.php'; ?>
+
 <h1 class="text-2xl font-bold mb-4">Nuevo Proyecto</h1>
 <form action="ProjectController.php?action=create" method="POST" class="space-y-4">
     <div>
