@@ -3,14 +3,15 @@ class Database {
     private $host = "localhost";
     private $db_name = "task_manager";
     private $username = "root";
-    private $password = "";
+    private $password = ""; // o tu contraseña si la tiene
+    private $port = "4044"; // 🔑 Agregar puerto
     public $conn;
 
     public function getConnection() {
         $this->conn = null;
         try {
             $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
+                "mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name,
                 $this->username,
                 $this->password
             );

@@ -65,6 +65,8 @@ class Task {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':uid', $user_id);
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // ✅ agregado
+    }
 
     public function readOne(){
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->table_name . " WHERE id=:id");
