@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +69,7 @@
                     ?>
                 </p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
-                <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
+              <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
         <?php endif; endforeach; ?>
     </div>
@@ -92,6 +100,7 @@ columns.forEach(col => {
 
 function updateStatus(id, status){
   fetch('TaskController.php?action=updateStatus', {
+
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: 'id=' + encodeURIComponent(id) + '&status=' + encodeURIComponent(status)

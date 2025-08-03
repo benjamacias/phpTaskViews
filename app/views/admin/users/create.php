@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
+    header('Location: ../../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +36,6 @@
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>
-<a href="AdminController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="../../../controllers/AdminController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
 </body>
 </html>

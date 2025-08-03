@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +35,7 @@
             <td class="border p-2 space-x-2">
                 <a href="ProjectController.php?action=edit&id=<?php echo $p['id']; ?>" class="text-blue-600">Editar</a>
                 <a href="ProjectController.php?action=delete&id=<?php echo $p['id']; ?>" onclick="return confirm('¿Eliminar?');" class="text-red-600">Eliminar</a>
+
             </td>
         </tr>
     <?php endforeach; ?>
