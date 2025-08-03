@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id'])){
 </head>
 <body class="p-4 bg-gray-50">
 <h1 class="text-2xl font-bold mb-4">Proyectos</h1>
-<a href="../../controllers/ProjectController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo proyecto</a>
+<a href="ProjectController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo proyecto</a>
 <table class="mt-4 w-full border-collapse border">
     <thead>
         <tr class="bg-gray-200">
@@ -33,13 +33,14 @@ if(!isset($_SESSION['user_id'])){
             <td class="border p-2"><?php echo htmlspecialchars($p['description']); ?></td>
             <td class="border p-2"><?php echo $p['start_date']; ?> - <?php echo $p['end_date']; ?></td>
             <td class="border p-2 space-x-2">
-                <a href="../../controllers/ProjectController.php?action=edit&id=<?php echo $p['id']; ?>" class="text-blue-600">Editar</a>
-                <a href="../../controllers/ProjectController.php?action=delete&id=<?php echo $p['id']; ?>" onclick="return confirm('¿Eliminar?');" class="text-red-600">Eliminar</a>
+                <a href="ProjectController.php?action=edit&id=<?php echo $p['id']; ?>" class="text-blue-600">Editar</a>
+                <a href="ProjectController.php?action=delete&id=<?php echo $p['id']; ?>" onclick="return confirm('¿Eliminar?');" class="text-red-600">Eliminar</a>
+
             </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
-<a href="../dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="../views/dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
 </body>
 </html>

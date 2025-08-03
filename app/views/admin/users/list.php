@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
@@ -14,7 +15,8 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
 </head>
 <body class="p-4 bg-gray-50">
 <h1 class="text-2xl font-bold mb-4">Usuarios</h1>
-<a href="../../../controllers/AdminController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo usuario</a>
+<a href="AdminController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo usuario</a>
+
 <table class="mt-4 w-full border-collapse border">
     <thead>
         <tr class="bg-gray-200">
@@ -35,6 +37,6 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
     <?php endforeach; ?>
     </tbody>
 </table>
-<a href="../../dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="../views/dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
 </body>
 </html>

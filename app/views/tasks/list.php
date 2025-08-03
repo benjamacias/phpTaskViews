@@ -5,6 +5,7 @@ if(!isset($_SESSION['user_id'])){
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@ if(!isset($_SESSION['user_id'])){
 </head>
 <body class="p-4 bg-gray-50">
 <h1 class="text-2xl font-bold mb-4">Tareas</h1>
-<a href="../../controllers/TaskController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nueva tarea</a>
+<a href="TaskController.php?action=create" class="bg-blue-500 text-white px-4 py-2 rounded">Nueva tarea</a>
 <div class="grid grid-cols-3 gap-4 mt-4">
     <div data-status="enproceso" class="p-4 bg-gray-100 rounded">
         <h2 class="font-semibold mb-2">En proceso</h2>
@@ -34,7 +35,7 @@ if(!isset($_SESSION['user_id'])){
                         <strong class="text-red-600">¡Pronto a vencer!</strong>
                     <?php endif; ?>
                 </p>
-                <a href="../../controllers/TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
+                <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
         <?php endif; endforeach; ?>
     </div>
@@ -51,7 +52,7 @@ if(!isset($_SESSION['user_id'])){
                     ?>
                 </p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
-                <a href="../../controllers/TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
+                <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
         <?php endif; endforeach; ?>
     </div>
@@ -68,12 +69,12 @@ if(!isset($_SESSION['user_id'])){
                     ?>
                 </p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
-                <a href="../../controllers/TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
+              <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
         <?php endif; endforeach; ?>
     </div>
 </div>
-<a href="../dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="../views/dashboard.php" class="inline-block mt-4 text-blue-600">Volver</a>
 <script>
 const tasks = document.querySelectorAll('.task');
 const columns = document.querySelectorAll('[data-status]');
@@ -98,7 +99,8 @@ columns.forEach(col => {
 });
 
 function updateStatus(id, status){
-  fetch('../../controllers/TaskController.php?action=updateStatus', {
+  fetch('TaskController.php?action=updateStatus', {
+
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: 'id=' + encodeURIComponent(id) + '&status=' + encodeURIComponent(status)

@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
 </head>
 <body class="p-4 bg-gray-50">
 <h1 class="text-2xl font-bold mb-4">Nuevo Usuario</h1>
-<form action="../../../controllers/AdminController.php?action=create" method="POST" class="space-y-4">
+<form action="AdminController.php?action=create" method="POST" class="space-y-4">
     <div>
         <label class="block mb-1">Nombre:</label>
         <input type="text" name="name" required class="border p-2 w-full rounded">

@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id'])){
 </head>
 <body class="p-4 bg-gray-50">
 <h1 class="text-2xl font-bold mb-4">Editar Proyecto</h1>
-<form action="../../controllers/ProjectController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
+<form action="ProjectController.php?action=edit&id=<?php echo $data['id']; ?>" method="POST" class="space-y-4">
     <div>
         <label class="block mb-1">Nombre:</label>
         <input type="text" name="name" value="<?php echo htmlspecialchars($data['name']); ?>" required class="border p-2 w-full rounded">
@@ -33,6 +33,6 @@ if(!isset($_SESSION['user_id'])){
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
 </form>
-<a href="../../controllers/ProjectController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
+<a href="ProjectController.php?action=list" class="inline-block mt-4 text-blue-600">Volver</a>
 </body>
 </html>
