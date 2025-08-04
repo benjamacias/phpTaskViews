@@ -7,6 +7,14 @@ class Database {
     private $port = "4044"; // 🔑 Agregar puerto
     public $conn;
 
+    public function __construct() {
+        $this->host = getenv('DB_HOST') ?: $this->host;
+        $this->db_name = getenv('DB_NAME') ?: $this->db_name;
+        $this->username = getenv('DB_USER') ?: $this->username;
+        $this->password = getenv('DB_PASS') ?: $this->password;
+        $this->port = getenv('DB_PORT') ?: $this->port;
+    }
+
     public function getConnection() {
         $this->conn = null;
         try {
