@@ -14,6 +14,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 <a href="/app/views/dashboard.php" class="hover:text-gray-200 transition">Dashboard</a>
                 <a href="/app/controllers/ProjectController.php?action=list" class="hover:text-gray-200 transition">Proyectos</a>
                 <a href="/app/controllers/TaskController.php?action=list" class="hover:text-gray-200 transition">Tareas</a>
+                <?php if(in_array($_SESSION['role'], ['admin','leader'])): ?>
+                    <a href="/app/controllers/ClientController.php?action=list" class="hover:text-gray-200 transition">Clientes</a>
+                <?php endif; ?>
                 <?php if($_SESSION['role'] === 'admin'): ?>
                     <a href="/app/controllers/AdminController.php?action=list" class="hover:text-gray-200 transition">Usuarios</a>
                     <a href="/app/controllers/AdminController.php?action=salary" class="hover:text-gray-200 transition">Sueldos</a>
