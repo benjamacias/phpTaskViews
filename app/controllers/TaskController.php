@@ -27,6 +27,7 @@ switch ($action) {
             $task->assigned_to = $assignedUsers[0] ?? null;
             $task->due_date = $_POST['due_date'];
             $task->status = $_POST['status'] ?? 'pending'; // ✅ usar el estado del formulario
+            $task->estimated_hours = $_POST['estimated_hours'];
             $newId = $task->create();
             if($newId && $assignedUsers){
                 $task->assignUsers($newId, $assignedUsers);
@@ -49,6 +50,7 @@ switch ($action) {
             $task->assigned_to = $assignedUsers[0] ?? null;
             $task->due_date = $_POST['due_date'];
             $task->status = $_POST['status'];
+            $task->estimated_hours = $_POST['estimated_hours'];
             $task->update();
             $task->clearUsers($task->id);
             if($assignedUsers){
@@ -60,6 +62,7 @@ switch ($action) {
         $data = $task->readOne();
         $assigned = $task->getUsers($task->id);
         $projects = $projectModel->readAll();
+        $users = $userModel->readAll();
         include __DIR__ . '/../views/tasks/edit.php';
         break;
 

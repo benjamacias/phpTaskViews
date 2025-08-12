@@ -22,6 +22,10 @@
         <input type="password" name="password" required class="border p-2 w-full rounded">
     </div>
     <div>
+        <label class="block mb-1">Valor por hora:</label>
+        <input type="number" step="0.01" name="hourly_rate" required class="border p-2 w-full rounded">
+    </div>
+    <div>
         <label class="block mb-1">Rol:</label>
         <select name="role" class="border p-2 w-full rounded">
             <option value="admin">Administrador</option>
