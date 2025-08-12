@@ -13,6 +13,7 @@
         <input type="text" name="name" placeholder="Nombre" required class="border p-2 w-full rounded">
         <input type="email" name="email" placeholder="Email" required class="border p-2 w-full rounded">
         <input type="password" name="password" placeholder="Contraseña" required class="border p-2 w-full rounded">
+        <input type="number" step="0.01" name="hourly_rate" placeholder="Valor por hora" required class="border p-2 w-full rounded">
         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Crear cuenta</button>
     </form>
 </div>
