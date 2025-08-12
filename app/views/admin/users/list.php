@@ -17,6 +17,7 @@
             <th class="border p-2">Email</th>
             <th class="border p-2">Rol</th>
             <th class="border p-2">Valor hora</th>
+            <th class="border p-2">Tags</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@
             <td class="border p-2"><?php echo htmlspecialchars($u['email']); ?></td>
             <td class="border p-2"><?php echo htmlspecialchars($u['role']); ?></td>
             <td class="border p-2 text-right"><?php echo $u['hourly_rate']; ?></td>
+            <td class="border p-2 text-center"><a href="AdminController.php?action=user_tags&user_id=<?php echo $u['id']; ?>" class="text-blue-600">Gestionar</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
