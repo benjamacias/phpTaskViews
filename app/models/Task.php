@@ -9,14 +9,15 @@ class Task {
     public $assigned_to;
     public $due_date;
     public $status;
+    public $estimated_hours;
 
     public function __construct($db){
         $this->conn = $db;
     }
 
     public function create(){
-        $query = "INSERT INTO " . $this->table_name . " (project_id, description, assigned_to, due_date, status)
-                  VALUES (:project_id, :description, :assigned_to, :due_date, :status)";
+        $query = "INSERT INTO " . $this->table_name . " (project_id, description, assigned_to, due_date, status, estimated_hours)
+                  VALUES (:project_id, :description, :assigned_to, :due_date, :status, :estimated_hours)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":project_id", $this->project_id);
         $stmt->bindParam(":description", $this->description);
@@ -27,6 +28,7 @@ class Task {
         }
         $stmt->bindParam(":due_date", $this->due_date);
         $stmt->bindParam(":status", $this->status);
+        $stmt->bindParam(":estimated_hours", $this->estimated_hours);
         if($stmt->execute()){
             return $this->conn->lastInsertId();
         }
@@ -79,7 +81,7 @@ class Task {
 
     public function update(){
         $query = "UPDATE " . $this->table_name . "
-                  SET project_id=:project_id, description=:description, assigned_to=:assigned_to, due_date=:due_date, status=:status
+                  SET project_id=:project_id, description=:description, assigned_to=:assigned_to, due_date=:due_date, status=:status, estimated_hours=:estimated_hours
                   WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":project_id", $this->project_id);
@@ -91,6 +93,7 @@ class Task {
         }
         $stmt->bindParam(":due_date", $this->due_date);
         $stmt->bindParam(":status", $this->status);
+        $stmt->bindParam(":estimated_hours", $this->estimated_hours);
         $stmt->bindParam(":id", $this->id);
         return $stmt->execute();
     }
@@ -111,6 +114,19 @@ class Task {
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":id", $this->id);
         return $stmt->execute();
+    }
+
+    public function sumHoursByProject($projectId){
+        $stmt = $this->conn->prepare("SELECT SUM(estimated_hours) as total FROM " . $this->table_name . " WHERE project_id=:pid");
+        $stmt->execute([':pid'=>$projectId]);
+        return (float)$stmt->fetchColumn();
+    }
+
+    public function sumHoursByUser($userId){
+        $query = "SELECT SUM(t.estimated_hours) as total FROM tasks t JOIN task_users tu ON t.id = tu.task_id WHERE tu.user_id = :uid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([':uid'=>$userId]);
+        return (float)$stmt->fetchColumn();
     }
 }
 ?>

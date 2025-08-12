@@ -16,6 +16,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <a href="/app/controllers/TaskController.php?action=list" class="hover:text-gray-200 transition">Tareas</a>
                 <?php if($_SESSION['role'] === 'admin'): ?>
                     <a href="/app/controllers/AdminController.php?action=list" class="hover:text-gray-200 transition">Usuarios</a>
+                    <a href="/app/controllers/AdminController.php?action=salary" class="hover:text-gray-200 transition">Sueldos</a>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

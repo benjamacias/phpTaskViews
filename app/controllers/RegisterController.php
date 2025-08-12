@@ -11,6 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $user->email = $_POST['email'];
     $user->password = $_POST['password'];
     $user->role = 'programmer';
+    $user->hourly_rate = 0;
     if($user->create()){
         $logged = $user->login();
         if($logged){

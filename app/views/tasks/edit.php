@@ -35,6 +35,10 @@ if(!isset($_SESSION['user_id'])){
         <input type="text" name="description" value="<?php echo htmlspecialchars($data['description']); ?>" required class="border p-2 w-full rounded">
     </div>
     <div>
+        <label class="block mb-1">Tiempo estimado (horas):</label>
+        <input type="number" step="0.1" name="estimated_hours" value="<?php echo htmlspecialchars($data['estimated_hours']); ?>" required class="border p-2 w-full rounded">
+    </div>
+    <div>
         <label class="block mb-1">Asignar a:</label>
         <select name="assigned_to" class="border p-2 w-full rounded">
             <?php foreach($users as $u): ?>

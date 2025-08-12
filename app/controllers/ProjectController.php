@@ -3,10 +3,12 @@ session_start();
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../models/Project.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Task.php';
 
 $db = (new Database())->getConnection();
 $project = new Project($db);
 $userModel = new User($db);
+$taskModel = new Task($db);
 
 $action = $_GET['action'] ?? 'list';
 
@@ -69,6 +71,9 @@ switch ($action) {
             $projects = $project->readAll();
         } else {
             $projects = $project->readByUser($_SESSION['user_id']);
+        }
+        foreach($projects as &$p){
+            $p['total_hours'] = $taskModel->sumHoursByProject($p['id']);
         }
         include __DIR__ . '/../views/projects/list.php';
         break;

@@ -16,6 +16,7 @@
             <th class="border p-2">Nombre</th>
             <th class="border p-2">Email</th>
             <th class="border p-2">Rol</th>
+            <th class="border p-2">Valor hora</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
             <td class="border p-2"><?php echo htmlspecialchars($u['name']); ?></td>
             <td class="border p-2"><?php echo htmlspecialchars($u['email']); ?></td>
             <td class="border p-2"><?php echo htmlspecialchars($u['role']); ?></td>
+            <td class="border p-2 text-right"><?php echo $u['hourly_rate']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

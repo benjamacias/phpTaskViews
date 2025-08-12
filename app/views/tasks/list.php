@@ -17,6 +17,7 @@
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
+                <p class="text-sm text-gray-600">Horas: <?php echo $t['estimated_hours']; ?></p>
                 <p class="text-sm">
                     <?php echo $t['due_date']; ?>
                     <?php if(strtotime($t['due_date']) < strtotime('+2 day')): ?>
@@ -34,6 +35,7 @@
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
+                <p class="text-sm text-gray-600">Horas: <?php echo $t['estimated_hours']; ?></p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
                 <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>
@@ -46,6 +48,7 @@
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['users']); ?></p>
+                <p class="text-sm text-gray-600">Horas: <?php echo $t['estimated_hours']; ?></p>
                 <p class="text-sm"><?php echo $t['due_date']; ?></p>
                 <a href="TaskController.php?action=edit&id=<?php echo $t['id']; ?>" class="text-blue-600 text-sm">Editar</a>
             </div>

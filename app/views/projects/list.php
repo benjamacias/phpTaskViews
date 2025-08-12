@@ -18,6 +18,7 @@
             <th class="border p-2">Nombre</th>
             <th class="border p-2">Descripción</th>
             <th class="border p-2">Fechas</th>
+            <th class="border p-2">Horas totales</th>
             <th class="border p-2">Acciones</th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@
             <td class="border p-2"><?php echo htmlspecialchars($p['name']); ?></td>
             <td class="border p-2"><?php echo htmlspecialchars($p['description']); ?></td>
             <td class="border p-2"><?php echo $p['start_date']; ?> - <?php echo $p['end_date']; ?></td>
+            <td class="border p-2 text-center"><?php echo $p['total_hours']; ?></td>
             <td class="border p-2 space-x-2">
 
                 <?php if($_SESSION['role'] === 'admin'): ?>
