@@ -34,18 +34,17 @@ class Project {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function readByUser($user_id){
-    $query = "SELECT t.*, p.name AS project_name 
-              FROM tasks t
-              JOIN task_users tu ON t.id = tu.task_id
-              JOIN projects p ON t.project_id = p.id
-              WHERE tu.user_id = :uid
-              ORDER BY t.due_date ASC";  // 🔑 Ordenar por fecha
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':uid', $user_id);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    public function readByUser($user_id){
+        $query = "SELECT DISTINCT p.*
+                  FROM projects p
+                  JOIN project_users pu ON p.id = pu.project_id
+                  WHERE pu.user_id = :uid
+                  ORDER BY p.start_date ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':uid', $user_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
     public function readOne(){

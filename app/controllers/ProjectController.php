@@ -75,6 +75,7 @@ switch ($action) {
         foreach($projects as &$p){
             $p['total_hours'] = $taskModel->sumHoursByProject($p['id']);
         }
+        unset($p);
         include __DIR__ . '/../views/projects/list.php';
         break;
 }
