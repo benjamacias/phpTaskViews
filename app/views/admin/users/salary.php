@@ -14,22 +14,39 @@
             <th class="border p-2">Nombre</th>
             <th class="border p-2">Valor hora</th>
             <th class="border p-2">Horas asignadas</th>
-            <th class="border p-2">Sueldo</th>
+            <th class="border p-2">Jubilación (%)</th>
+            <th class="border p-2">Obra Social (%)</th>
+            <th class="border p-2">Sindicato (%)</th>
+            <th class="border p-2">Tags</th>
+            <th class="border p-2">Sueldo Neto</th>
+            <th class="border p-2">Acción</th>
         </tr>
     </thead>
     <tbody>
     <?php foreach($employees as $e): ?>
         <tr class="bg-white">
-            <td class="border p-2"><?php echo htmlspecialchars($e['name']); ?></td>
-            <td class="border p-2">
-                <form action="AdminController.php?action=salary" method="POST" class="flex space-x-2 items-center">
+            <form action="AdminController.php?action=salary" method="POST" class="contents">
+                <td class="border p-2"><?php echo htmlspecialchars($e['name']); ?></td>
+                <td class="border p-2">
                     <input type="hidden" name="user_id" value="<?php echo $e['id']; ?>">
                     <input type="number" step="0.01" name="hourly_rate" value="<?php echo $e['hourly_rate']; ?>" class="border p-1 w-24 rounded">
-                    <button type="submit" class="text-blue-600">Guardar</button>
-                </form>
-            </td>
-            <td class="border p-2 text-center"><?php echo $e['total_hours']; ?></td>
-            <td class="border p-2 text-right">$<?php echo number_format($e['salary'], 2); ?></td>
+                </td>
+                <td class="border p-2 text-center"><?php echo $e['total_hours']; ?></td>
+                <td class="border p-2">
+                    <input type="number" step="0.01" name="retirement" value="<?php echo $e['retirement']; ?>" class="border p-1 w-20 rounded">
+                </td>
+                <td class="border p-2">
+                    <input type="number" step="0.01" name="social_security" value="<?php echo $e['social_security']; ?>" class="border p-1 w-20 rounded">
+                </td>
+                <td class="border p-2">
+                    <input type="number" step="0.01" name="union_fee" value="<?php echo $e['union_fee']; ?>" class="border p-1 w-20 rounded">
+                </td>
+                <td class="border p-2"><?php echo implode(', ', array_map(function($t){ return htmlspecialchars($t['name']); }, $e['tags'] ?? [])); ?></td>
+                <td class="border p-2 text-right">$<?php echo number_format($e['salary'], 2); ?></td>
+                <td class="border p-2 text-center">
+                    <button type="submit" class="text-blue-600">Registrar</button>
+                </td>
+            </form>
         </tr>
     <?php endforeach; ?>
     </tbody>
