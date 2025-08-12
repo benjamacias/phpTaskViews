@@ -18,6 +18,7 @@
             <th class="border p-2">Obra Social (%)</th>
             <th class="border p-2">Sindicato (%)</th>
             <th class="border p-2">Tags</th>
+
             <th class="border p-2">Sueldo Neto</th>
             <th class="border p-2">Acción</th>
         </tr>
@@ -42,6 +43,7 @@
                     <input type="number" step="0.01" name="union_fee" value="<?php echo $e['union_fee']; ?>" class="border p-1 w-20 rounded">
                 </td>
                 <td class="border p-2"><?php echo implode(', ', array_map(function($t){ return htmlspecialchars($t['name']); }, $e['tags'] ?? [])); ?></td>
+
                 <td class="border p-2 text-right">$<?php echo number_format($e['salary'], 2); ?></td>
                 <td class="border p-2 text-center">
                     <button type="submit" class="text-blue-600">Registrar</button>

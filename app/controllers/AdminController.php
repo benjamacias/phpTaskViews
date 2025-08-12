@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Task.php';
 require_once __DIR__ . '/../models/SalaryRecord.php';
+
 require_once __DIR__ . '/../models/Tag.php';
+
 
 if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin'){
     header("Location: ../views/login.php");
@@ -16,6 +18,7 @@ $user = new User($db);
 $taskModel = new Task($db);
 $salaryRecord = new SalaryRecord($db);
 $tagModel = new Tag($db);
+
 
 $action = $_GET['action'] ?? 'list';
 
@@ -102,6 +105,7 @@ switch ($action) {
             $soc = $gross * ($social / 100);
             $uni = $gross * ($union / 100);
             $net = $gross - $ret - $soc - $uni;
+
 
             $userTags = $tagModel->getTagsByUser($user->id);
             foreach ($userTags as $t) {

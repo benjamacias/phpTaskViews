@@ -30,7 +30,7 @@
     </div>
     <div data-status="completed" class="p-4 bg-gray-100 rounded">
         <h2 class="font-semibold mb-2">Completado</h2>
-        <?php foreach($tasks as $t): if($t['status']==='complete'): ?>
+        <?php foreach($tasks as $t): if($t['status']==='completed'): ?>
             <div class="task p-2 mb-2 bg-white rounded shadow" draggable="true" data-id="<?php echo $t['id']; ?>">
                 <p class="font-medium"><?php echo htmlspecialchars($t['description']); ?></p>
                 <p class="text-sm text-gray-600"><?php echo htmlspecialchars($t['project_name']); ?></p>
